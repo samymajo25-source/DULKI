@@ -191,9 +191,30 @@
     }
 </style>
 <script>
+    const priceOverrides = {
+        'CHEESECAKE': '$2.00',
+        'CHOCO BOMBAS': '$1.35',
+        'COPA DE CHOCOLATE': '$2.10',
+        'FRESAS PERSONALIZADAS': '$1.00',
+        'GALLETAS OREO CUBIERTAS': '$1.35',
+        'PANCAKES PERSONALIZADOS': '$2.50',
+        'PASTELES COMPLETOS': '$8.00',
+        'PASTELES INDIVIDUALES': '$1.85',
+        'TRUFAS OREO': '$1.30',
+        'VASO DE FRESAS CON CREMA': '$1.85'
+    };
+
+    document.querySelectorAll('[onclick^="openProductModal"]').forEach(card => {
+        const title = card.querySelector('h3')?.textContent.trim();
+        const price = priceOverrides[title];
+        const priceElement = card.querySelector('p');
+        if (price && priceElement) priceElement.textContent = price;
+    });
+
     let currentQty = 1;
 
     function openProductModal(title, price, imageSrc) {
+        price = priceOverrides[title] || price;
         document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-price').innerText = price;
         document.getElementById('modal-img').src = imageSrc;
