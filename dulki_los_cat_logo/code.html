@@ -192,7 +192,7 @@
 </style>
 <script>
     const priceOverrides = {
-        'TARTA DE QUESO DE MARACUYÁ': '$2.00',
+        'CHEESCAKE DE MARACUYA': '$2.00',
         'CHOCO BOMBAS': '$1.35',
         'COPA DE CHOCOLATE': '$2.10',
         'FRESAS PERSONALIZADAS': '$1.00',
@@ -216,7 +216,7 @@
 
     document.querySelectorAll('[onclick^="openProductModal"]').forEach(card => {
         const originalTitle = card.querySelector('h3')?.textContent.trim();
-        const title = originalTitle === 'CHEESECAKE' ? 'TARTA DE QUESO DE MARACUYÁ' : originalTitle;
+        const title = originalTitle === 'CHEESECAKE' ? 'CHEESCAKE DE MARACUYA' : originalTitle;
         const price = priceOverrides[title];
         const priceElement = card.querySelector('p');
         const image = card.querySelector('img');
