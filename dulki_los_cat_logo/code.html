@@ -192,7 +192,7 @@
 </style>
 <script>
     const priceOverrides = {
-        'CHEESECAKE': '$2.00',
+        'TARTA DE QUESO DE MARACUYÁ': '$2.00',
         'CHOCO BOMBAS': '$1.35',
         'COPA DE CHOCOLATE': '$2.10',
         'FRESAS PERSONALIZADAS': '$1.00',
@@ -204,11 +204,28 @@
         'VASO DE FRESAS CON CREMA': '$1.85'
     };
 
+    const imageOverrides = {
+        'CHEESECAKE': '../imagenes/cheesecake-maracuya.png',
+        'COPA DE CHOCOLATE': '../imagenes/copa-chocolate.png',
+        'PANCAKES PERSONALIZADOS': '../imagenes/pancakes-personalizados.png',
+        'PASTELES COMPLETOS': '../imagenes/pasteles-completos.png',
+        'PASTELES INDIVIDUALES': '../imagenes/pasteles-individuales.png',
+        'TRUFAS OREO': '../imagenes/trufas-oreo.png',
+        'VASO DE FRESAS CON CREMA': '../imagenes/vaso-fresas.png'
+    };
+
     document.querySelectorAll('[onclick^="openProductModal"]').forEach(card => {
-        const title = card.querySelector('h3')?.textContent.trim();
+        const originalTitle = card.querySelector('h3')?.textContent.trim();
+        const title = originalTitle === 'CHEESECAKE' ? 'TARTA DE QUESO DE MARACUYÁ' : originalTitle;
         const price = priceOverrides[title];
         const priceElement = card.querySelector('p');
+        const image = card.querySelector('img');
+        const imageSrc = imageOverrides[originalTitle] || image?.src || '';
+        const titleElement = card.querySelector('h3');
+        if (titleElement) titleElement.textContent = title;
+        if (image && imageOverrides[originalTitle]) image.src = imageSrc;
         if (price && priceElement) priceElement.textContent = price;
+        if (title && price) card.setAttribute('onclick', `openProductModal('${title}', '${price}', '${imageSrc}')`);
     });
 
     let currentQty = 1;
